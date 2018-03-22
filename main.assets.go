@@ -279,10 +279,9 @@ func createAsset(u SnowAssetStruct, espXmlmc *apiLib.XmlmcInstStruct, assetType 
 	}
 	espXmlmc.CloseElement("record")
 	espXmlmc.CloseElement("relatedEntityData")
-
+	var XMLSTRING = espXmlmc.GetParam()
 	//-- Check for Dry Run
 	if configDryRun != true {
-		var XMLSTRING = espXmlmc.GetParam()
 		if configDebug {
 			logger(1, "Asset Insert XML "+fmt.Sprintf("%s", XMLSTRING), false)
 		}
@@ -345,7 +344,6 @@ func createAsset(u SnowAssetStruct, espXmlmc *apiLib.XmlmcInstStruct, assetType 
 		}
 	} else {
 		//-- DEBUG XML TO LOG FILE
-		var XMLSTRING = espXmlmc.GetParam()
 		logger(1, "Asset Create XML "+fmt.Sprintf("%s", XMLSTRING), false)
 		mutexCounters.Lock()
 		counters.createskipped++
@@ -630,9 +628,7 @@ func updateAsset(u SnowAssetStruct, strAssetID string, espXmlmc *apiLib.XmlmcIns
 		mutexCounters.Lock()
 		counters.updatedSkipped++
 		mutexCounters.Unlock()
-		if configDebug {
-			logger(1, "Asset Update XML "+fmt.Sprintf("%s", XMLSTRING), false)
-		}
+		logger(1, "Asset Update XML "+fmt.Sprintf("%s", XMLSTRING), false)
 
 		espXmlmc.ClearParam()
 	}
