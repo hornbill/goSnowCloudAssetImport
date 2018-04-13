@@ -7,7 +7,7 @@ import (
 )
 
 //----- Constants -----
-const version = "1.0.1"
+const version = "1.0.2"
 const appServiceManager = "com.hornbill.servicemanager"
 const recordsPerPage = 100
 
@@ -59,7 +59,8 @@ type counterTypeStruct struct {
 	createskipped  uint16
 }
 type apiImportConfStruct struct {
-	APIConf struct {
+	AddAssets bool `json:"AddAssets"`
+	APIConf   struct {
 		APIURL            string `json:"APIURL"`
 		ComputersAbstract string `json:"ComputersAbstract"`
 		CustomerID        int    `json:"CustomerID"`
@@ -74,6 +75,7 @@ type apiImportConfStruct struct {
 	AssetTypes               []AssetTypeStruct `json:"AssetTypes"`
 	InstanceID               string            `json:"InstanceId"`
 	LogSizeBytes             int64             `json:"LogSizeBytes"`
+	UpdateAssets             bool              `json:"UpdateAssets"`
 	URL                      string
 	UserMappedFields         []UserMappedFieldsStruct `json:"UserMappedFields"`
 }

@@ -3,6 +3,8 @@
     "InstanceId": "Hornbill Instance ID goes here",
     "AssetIdentifier": "h_name",
     "LogSizeBytes": 1000000,
+    "AddAssets": false,
+    "UpdateAssets": false,
     "APIConf": {
         "APIURL": "Snow License Manager API URL goes here",
         "UserName": "username",

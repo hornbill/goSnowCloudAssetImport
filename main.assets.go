@@ -79,10 +79,11 @@ func processAssets(arrAssets []SnowAssetBodyStruct, assetType AssetTypeStruct) {
 				var boolUpdate = false
 				boolUpdate, assetIDInstance := getAssetID(assetID, espXmlmc)
 				//-- Update or Create Asset
-				if boolUpdate {
+				if boolUpdate && APIImportConf.UpdateAssets {
 					logger(1, "Update Asset: "+assetID+" ["+assetIDInstance+"]", false)
 					updateAsset(assetMap, assetIDInstance, espXmlmc, assetType)
-				} else {
+				}
+				if !boolUpdate && APIImportConf.AddAssets {
 					logger(1, "Create Asset: "+assetID, false)
 					createAsset(assetMap, espXmlmc, assetType)
 				}

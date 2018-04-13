@@ -95,10 +95,14 @@ func main() {
 	}
 
 	//-- End output
-	logger(1, "Updated: "+fmt.Sprintf("%d", counters.updated), true)
-	logger(1, "Updated Skipped: "+fmt.Sprintf("%d", counters.updatedSkipped), true)
-	logger(1, "Created: "+fmt.Sprintf("%d", counters.created), true)
-	logger(1, "Created Skipped: "+fmt.Sprintf("%d", counters.createskipped), true)
+	if APIImportConf.UpdateAssets {
+		logger(1, "Updated: "+fmt.Sprintf("%d", counters.updated), true)
+		logger(1, "Updated Skipped: "+fmt.Sprintf("%d", counters.updatedSkipped), true)
+	}
+	if APIImportConf.AddAssets {
+		logger(1, "Created: "+fmt.Sprintf("%d", counters.created), true)
+		logger(1, "Created Skipped: "+fmt.Sprintf("%d", counters.createskipped), true)
+	}
 	//-- Show Time Takens
 	endTime = time.Now().Sub(startTime)
 	logger(1, "Time Taken: "+fmt.Sprintf("%v", endTime), true)

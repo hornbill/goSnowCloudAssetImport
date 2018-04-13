@@ -38,6 +38,8 @@ Example JSON File:
     "InstanceId": "Hornbill Instance ID goes here",
     "AssetIdentifier": "h_name",
     "LogSizeBytes": 1000000,
+    "AddAssets": true,
+    "UpdateAssets": true,
     "APIConf": {
         "APIURL": "Snow License Manager API URL goes here",
         "UserName": "username",
@@ -76,7 +78,6 @@ Example JSON File:
             "RecordsAbstract": "computers",
             "UsersAbstract": "users",
             "AssetID": "Asset.Name"
-            
         },
         {
             "AssetType":"Laptop",
@@ -195,6 +196,8 @@ Example JSON File:
 * **InstanceId** - Case-sensitive ID of the Hornbill instance to import to
 * **AssetIdentifier** - The column in the asset table in Hornbill that holds the unique asset identifier (so that the code can work out which asset records are to be inserted or updated)
 * **LogSizeBytes** - The maximum size that the generated Log Files should be, in bytes. Setting this value to 0 will cause the tool to create one log file only and not split the results between multiple logs
+* **AddAssets** - Boolean true or false, defines wether discovered assets should be added to Hornbill
+* **UpdateAssets**  - Boolean true or false, defines wether discovered assets that already exist in Hornbill should be updated
 
 #### APIConf
 * **APIURL** - The URL of the Snow License Server Cloud API
