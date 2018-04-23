@@ -177,6 +177,7 @@ func createAsset(u SnowAssetStruct, espXmlmc *apiLib.XmlmcInstStruct, assetType 
 		ownedByURN = "urn:sys:0:" + ownedByName + ":" + ownedByID
 	}
 
+	//Last Logged On By
 	lastLoggedOnByURN := ""
 	lastLoggedOnUserMapping := fmt.Sprintf("%v", APIImportConf.AssetTypeFieldMapping["h_last_logged_on_user"])
 	if lastLoggedOnUserMapping != "" {
@@ -274,7 +275,8 @@ func createAsset(u SnowAssetStruct, espXmlmc *apiLib.XmlmcInstStruct, assetType 
 			espXmlmc.SetParam("h_last_logged_on_user", lastLoggedOnByURN)
 		}
 		if strAttribute != "h_last_logged_on_user" &&
-			strMapping != "" && getFieldValue(strAttribute, strMapping, u, assetType) != "" {
+			strMapping != "" &&
+			getFieldValue(strAttribute, strMapping, u, assetType) != "" {
 			espXmlmc.SetParam(strAttribute, getFieldValue(strAttribute, strMapping, u, assetType))
 		}
 	}

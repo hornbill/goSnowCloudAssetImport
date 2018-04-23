@@ -228,6 +228,8 @@ Any property value can contain any mixture of mapped vales and plain text. More 
 
 #### AssetTypeFieldMapping
 * Maps data in to the type-specific Asset record, using the same rules as AssetGenericFieldMapping
+* For the computer asset class:
+    * "h_last_logged_on_user":"[UserName]" - when a valid Hornbill User ID (for a Full or Basic User) is passed to this field, the user is verified on your Hornbill instance, and the tool will complete the h_last_logged_on_user column with an appropriate URN value for the user.
 
 #### UserMappedFields
 An array of objects, where each will define the column to retrieve from the API call, and the rules to retrieve the record, from the list of users associated to an asset. A limit of 1 will be automatically applied to the resultset, so only one user record will ever be returned.
