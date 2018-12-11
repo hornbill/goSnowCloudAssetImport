@@ -7,7 +7,7 @@ import (
 )
 
 //----- Constants -----
-const version = "1.0.3"
+const version = "1.1.0"
 const appServiceManager = "com.hornbill.servicemanager"
 const recordsPerPage = 100
 
@@ -17,10 +17,10 @@ var (
 	APIImportConf       apiImportConfStruct
 	XmlmcInstanceConfig xmlmcConfig
 	Sites               []siteListStruct
+	Groups              []groupListStruct
 	counters            counterTypeStruct
 	configFileName      string
 	configMaxRoutines   string
-	configZone          string
 	configDryRun        bool
 	configDebug         bool
 	Customers           []customerListStruct
@@ -31,15 +31,15 @@ var (
 	AssetClass          string
 	AssetTypeID         int
 	StrAssetType        string
-	//espXmlmc            *apiLib.XmlmcInstStruct
-	mutex          = &sync.Mutex{}
-	mutexBar       = &sync.Mutex{}
-	mutexCounters  = &sync.Mutex{}
-	mutexCustomers = &sync.Mutex{}
-	mutexSite      = &sync.Mutex{}
-	worker         sync.WaitGroup
-	maxGoroutines  = 1
-	logFilePart    = 0
+	mutex               = &sync.Mutex{}
+	mutexBar            = &sync.Mutex{}
+	mutexCounters       = &sync.Mutex{}
+	mutexCustomers      = &sync.Mutex{}
+	mutexSite           = &sync.Mutex{}
+	mutexGroup          = &sync.Mutex{}
+	worker              sync.WaitGroup
+	maxGoroutines       = 1
+	logFilePart         = 0
 )
 
 //----- Structures -----
@@ -99,6 +99,13 @@ type AssetTypeStruct struct {
 	UsersAbstract   string `json:"UsersAbstract"`
 	AssetID         string `json:"AssetID"`
 }
+
+type groupListStruct struct {
+	GroupName string
+	GroupType int
+	GroupID   string
+}
+
 type siteLookupStruct struct {
 	Enabled  bool
 	QueryCol string
@@ -113,6 +120,11 @@ type xmlmcResponse struct {
 	State        stateStruct  `xml:"state"`
 }
 
+type xmlmcGroupListResponse struct {
+	MethodResult string      `xml:"status,attr"`
+	GroupID      string      `xml:"params>rowData>row>h_id"`
+	State        stateStruct `xml:"state"`
+}
 type xmlmcUpdateResponse struct {
 	MethodResult string      `xml:"status,attr"`
 	UpdatedCols  updatedCols `xml:"params>primaryEntityData>record"`

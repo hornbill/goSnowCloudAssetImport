@@ -24,7 +24,6 @@ func main() {
 	TimeNow = strings.Replace(TimeNow, ":", "-", -1)
 	//-- Grab Flags
 	flag.StringVar(&configFileName, "file", "conf.json", "Name of Configuration File To Load")
-	flag.StringVar(&configZone, "zone", "eur", "Override the default Zone the instance sits in")
 	flag.BoolVar(&configDryRun, "dryrun", false, "Allow the Import to run without Creating or Updating Assets")
 	flag.BoolVar(&configDebug, "debug", false, "Produces extended logging.")
 	flag.StringVar(&configMaxRoutines, "concurrent", "1", "Maximum number of Assets to import concurrently.")
@@ -34,7 +33,6 @@ func main() {
 	//-- Output
 	logger(1, "---- Hornbill Snow License Manager Cloud Asset Import Utility V"+version+" ----", true)
 	logger(1, "Flag - Config File "+fmt.Sprintf("%s", configFileName), true)
-	logger(1, "Flag - Zone "+fmt.Sprintf("%s", configZone), true)
 	logger(1, "Flag - Dry Run "+fmt.Sprintf("%v", configDryRun), true)
 
 	//Check maxGoroutines for valid value
@@ -58,11 +56,6 @@ func main() {
 	if APIImportConf.LogSizeBytes > 0 {
 		maxLogFileSize = APIImportConf.LogSizeBytes
 	}
-
-	//-- Set Instance ID
-	SetInstance(configZone, APIImportConf.InstanceID)
-	//-- Generate Instance XMLMC Endpoint
-	APIImportConf.URL = getInstanceURL()
 
 	for _, v := range APIImportConf.AssetTypes {
 		skipRows := 0

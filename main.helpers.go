@@ -8,7 +8,6 @@ import (
 	"strconv"
 
 	"github.com/hornbill/color"
-	"github.com/hornbill/goApiLib"
 )
 
 // logger -- function to append to the current log file
@@ -87,17 +86,6 @@ func logger(t int, s string, outputtoCLI bool) {
 	log.SetOutput(f)
 	log.Println(errorLogPrefix + s)
 	mutex.Unlock()
-}
-
-// espLogger -- Log to ESP
-func espLogger(message string, severity string) {
-	espXmlmc := apiLib.NewXmlmcInstance(APIImportConf.URL)
-	espXmlmc.SetAPIKey(APIImportConf.APIKey)
-	espXmlmc.SetParam("fileName", "SQL_Asset_Import")
-	espXmlmc.SetParam("group", "general")
-	espXmlmc.SetParam("severity", severity)
-	espXmlmc.SetParam("message", message)
-	espXmlmc.Invoke("system", "logMessage")
 }
 
 //loadConfig -- Function to Load Configruation File
