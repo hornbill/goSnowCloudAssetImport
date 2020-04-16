@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.1.1 (April 16th, 2020)
+
+Changes:
+
+- Updated code to support Core application and platform changes
+- Added version flag to enable auto-build
+
 ## 1.1.0 (December 11th 2018)
 
 Features:

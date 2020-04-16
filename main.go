@@ -27,8 +27,15 @@ func main() {
 	flag.BoolVar(&configDryRun, "dryrun", false, "Allow the Import to run without Creating or Updating Assets")
 	flag.BoolVar(&configDebug, "debug", false, "Produces extended logging.")
 	flag.StringVar(&configMaxRoutines, "concurrent", "1", "Maximum number of Assets to import concurrently.")
+	flag.BoolVar(&configVersion, "version", false, "Return the Version number")
 	//-- Parse Flags
 	flag.Parse()
+
+	//-- If configVersion just output version number and die
+	if configVersion {
+		fmt.Printf("%v \n", version)
+		return
+	}
 
 	//-- Output
 	logger(1, "---- Hornbill Snow License Manager Cloud Asset Import Utility V"+version+" ----", true)
